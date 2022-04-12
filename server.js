@@ -5,14 +5,16 @@ const readline = require('readline');
 const request = require('request');
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname+"/assets"));
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
     res.render('index');
 })
 
-app.get('/characters', function(req, res){
+app.get('/characters', (req, res) => {
     // Defining the request URL
     var options = {
         url: 'https://api.genshin.dev/characters'
@@ -29,12 +31,12 @@ app.get('/characters', function(req, res){
             // Rendering test express file while passing in the response object to be used.
             res.render('characters', {characters: characters})
         } else {
-            console.log(error)
+            console.log('Error fetching characters', error)
         }
     }
 })
 
-app.get('/characters/:name', function(req , res){
+app.get('/character/:name', (req , res) => {
     var name = req.params.name;
     var options = {
         url: `https://api.genshin.dev/characters/${name}`
@@ -51,11 +53,11 @@ app.get('/characters/:name', function(req , res){
             // Rendering test express file while passing in the response object to be used.
             res.render('character', {character: character})
         } else {
-            console.log(error)
+            console.log('Error fetching character', error);
         }
     }
 });
 
-app.listen(8081, function () {
-    console.log("Server is up & running!");
+app.listen(PORT, () => {
+    console.log(`Server is up & running @ localhost:${PORT}!`);
 })
