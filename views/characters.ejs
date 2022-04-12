@@ -15,11 +15,14 @@
   </head>
   <body class="px-40">
     <%- include('partials/header'); -%>
-    <div class="flex flex-wrap gap-2">
+    <div class="flex flex-row flex-wrap justify-between">
       <% characters.forEach(function(character) { %>
-      <a href="/characters/<%= character %>" class="card capitalize"
-        ><%= character %></a
-      >
+      <div class="flex flex-col text-center">
+        <img src="https://api.genshin.dev/characters/<%= character %>/icon" />
+        <a href="/character/<%= character %>" class="capitalize"
+          ><%= character %></a
+        >
+      </div>
       <% }); %>
     </div>
   </body>

@@ -16,7 +16,23 @@
   <body class="px-40">
     <%- include('partials/header'); -%>
     <div class="flex flex-wrap gap-2">
-      <h1><%= character.name %></h1>
+      <img
+        class="rounded-full border-2 border-gray-800"
+        src="https://api.genshin.dev/characters/<%= character.name.toLowerCase() %>/icon"
+      />
+      <div class="flex flex-col">
+        <div class="flex flex-row items-center gap-2">
+          <h1><%= character.name %></h1>
+          <span>( <%= character.rarity %> <i class="fas fa-star"></i> )</span>
+          <img
+            class="w-5 h-5"
+            src="https://api.genshin.dev/elements/<%= character.vision.toLowerCase() %>/icon"
+          />
+        </div>
+        <h2><%= character.description %></h2>
+        <!--- TODO: Convert into actual date. --->
+        <span>Born <%= character.birthday %></span>
+      </div>
     </div>
   </body>
 </html>
